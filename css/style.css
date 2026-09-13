@@ -10650,3 +10650,17 @@ width: auto;
         letter-spacing: -0.5px;
     }
 }
+ 
+.top-capital-name-footer {
+    letter-spacing: -1px;
+}
+
+@media (max-width: 767px) {
+    .top-capital-name {
+       
+    }
+
+    .menu-item {
+        letter-spacing: -0.5px;
+    }
+}
