@@ -60,45 +60,14 @@
 
                     <div class="spacer-single"></div>
 
-                    <div class="row g-4">
-                        <div class="col-md-6">
-                            <i class="abs fs-28 p-3 bg-color text-light rounded-1 icofont-location-pin"></i>
-                            <div class="ms-80px">
-                                <h4 class="mb-0">Address</h4>
-                                742 Evergreen Terrace
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <i class="abs fs-28 p-3 bg-color text-light rounded-1 icofont-envelope"></i>
-                            <div class="ms-80px">
-                                <h4 class="mb-0">Email</h4>
-                                contact@rivora.com
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <i class="abs fs-28 p-3 bg-color text-light rounded-1 icofont-phone"></i>
-                            <div class="ms-80px">
-                                <h4 class="mb-0">Phone</h4>
-                                (123) 202-9296
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <i class="abs fs-28 p-3 bg-color text-light rounded-1 icofont-phone"></i>
-                            <div class="ms-80px">
-                                <h4 class="mb-0">Instagram</h4>
-                                rivora_hotel_theme
-                            </div>
-                        </div>
-                    </div>
+                    <div class="row g-4" data-cms="contact-info"></div>
 
                 </div>
 
                 <div class="col-lg-6">
                     <div class="bg-color-op-1 rounded-1 p-40 relative">
-                        <form name="contactForm" id="contact_form" method="post" action="contact.php">
+                        <form name="contactForm" id="contact_form" method="post" novalidate>
+                        <input type="text" name="website" class="d-none" tabindex="-1" autocomplete="off" aria-hidden="true">
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <h5>Name</h5>
@@ -133,16 +102,19 @@
                                 </div>
                             </div>
                         </div>
-                            
-                        
-                        
                     </form>
                     </div>
                 </div>
               </div>
             </div>
         </section>
-        
+
+        <section class="pt-0" data-hide-empty>
+            <div class="container">
+                <div data-cms="contact-map"></div>
+            </div>
+        </section>
+
     </main>
 
     <div data-include="footer"></div>

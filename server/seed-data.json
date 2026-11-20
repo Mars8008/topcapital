@@ -1,0 +1,297 @@
+{
+  "services": [
+    {
+      "title": "Kitchen Remodeling",
+      "summary": "Transform the heart of your home with custom cabinetry, premium countertops, elegant lighting, and functional layouts designed for modern living.",
+      "image": "images/services/1.webp",
+      "icon": "images/icons-white/1.png"
+    },
+    {
+      "title": "Bathroom Renovation",
+      "summary": "Upgrade your bathroom with luxurious finishes, walk-in showers, modern vanities, and timeless designs that blend comfort with elegance.",
+      "image": "images/services/2.webp",
+      "icon": "images/icons-white/2.png"
+    },
+    {
+      "title": "Whole Home Renovation",
+      "summary": "Reimagine your entire home with complete renovations that improve style, comfort, functionality, and long-term property value.",
+      "image": "images/services/3.webp",
+      "icon": "images/icons-white/3.png"
+    },
+    {
+      "title": "Interior Remodeling",
+      "summary": "Refresh every room with modern layouts, premium finishes, and personalized interior designs that perfectly match your lifestyle.",
+      "image": "images/services/4.webp",
+      "icon": "images/icons-white/4.png"
+    },
+    {
+      "title": "Home Additions",
+      "summary": "Expand your home with seamless room additions, custom extensions, and thoughtfully designed spaces that grow with your family's needs.",
+      "image": "images/services/5.webp",
+      "icon": "images/icons-white/5.png"
+    },
+    {
+      "title": "Exterior Renovation",
+      "summary": "Enhance curb appeal with exterior renovations, new siding, roofing, windows, doors, and beautiful finishes built to last.",
+      "image": "images/services/6.webp",
+      "icon": "images/icons-white/6.png"
+    }
+  ],
+  "serviceDetail": {
+    "heading": "Create a Beautiful Kitchen Designed for Modern Living",
+    "content": "The kitchen is the heart of every home. Our kitchen remodeling services combine thoughtful layouts, premium materials, and expert craftsmanship to create spaces that are both functional and visually stunning.\n\nWhether you're planning a complete renovation or upgrading selected features, we design kitchens that improve comfort, efficiency, and long-term value while reflecting your personal style.",
+    "highlightValue": "15+",
+    "highlightLabel": "Years Experience",
+    "highlightTitle": "Transform the Heart of Your Home",
+    "highlightText": "We specialize in creating beautiful kitchens with custom cabinetry, premium countertops, modern lighting, and intelligent layouts that enhance everyday living while increasing your property's value.",
+    "features": [
+      {
+        "icon": "fa-solid fa-kitchen-set",
+        "title": "Custom Cabinetry",
+        "text": "Maximize storage and style with custom cabinets tailored to your space and lifestyle."
+      },
+      {
+        "icon": "fa-solid fa-layer-group",
+        "title": "Premium Countertops",
+        "text": "Choose quartz, granite, marble, or other premium surfaces for lasting beauty and durability."
+      },
+      {
+        "icon": "fa-solid fa-lightbulb",
+        "title": "Modern Lighting",
+        "text": "Enhance your kitchen with layered lighting, pendant fixtures, and under-cabinet illumination."
+      },
+      {
+        "icon": "fa-solid fa-ruler-combined",
+        "title": "Space Optimization",
+        "text": "Improve workflow and comfort with smart layouts that maximize every square foot."
+      },
+      {
+        "icon": "fa-solid fa-plug-circle-bolt",
+        "title": "Appliance Integration",
+        "text": "Seamlessly integrate modern appliances for improved efficiency and a clean contemporary appearance."
+      },
+      {
+        "icon": "fa-solid fa-award",
+        "title": "Quality Craftsmanship",
+        "text": "Every project is completed with exceptional attention to detail using premium materials and proven construction methods."
+      }
+    ],
+    "beforeImage": "images/before-after/1b.webp",
+    "afterImage": "images/before-after/1a.webp",
+    "ctaTitle": "Ready to Build Your Dream Kitchen?",
+    "ctaText": "Schedule a free consultation and let our remodeling experts design a kitchen that's beautiful, functional, and built to last."
+  },
+  "projects": [
+    {
+      "title": "Modern Kitchen Remodel",
+      "location": "Seattle, WA",
+      "duration": "Completed in 6 Weeks",
+      "summary": "A contemporary kitchen transformation featuring custom cabinetry, quartz countertops, premium appliances, and elegant pendant lighting.",
+      "coverImage": "images/projects/1.webp"
+    },
+    {
+      "title": "Luxury Bathroom Upgrade",
+      "location": "Scottsdale, AZ",
+      "duration": "Completed in 4 Weeks",
+      "summary": "An elegant bathroom renovation featuring a walk-in shower, floating vanity, premium tilework, and spa-inspired finishes.",
+      "coverImage": "images/projects/2.webp"
+    },
+    {
+      "title": "Complete Home Renovation",
+      "location": "Denver, CO",
+      "duration": "Completed in 16 Weeks",
+      "summary": "A full-scale renovation that modernized every room with open living spaces, premium materials, and timeless architectural details.",
+      "coverImage": "images/projects/3.webp"
+    },
+    {
+      "title": "Contemporary Living Room",
+      "location": "Nashville, TN",
+      "duration": "Completed in 3 Weeks",
+      "summary": "A stylish interior remodel with custom feature walls, built-in shelving, hardwood flooring, and sophisticated lighting design.",
+      "coverImage": "images/projects/4.webp"
+    },
+    {
+      "title": "Luxury Home Extension",
+      "location": "Charlotte, NC",
+      "duration": "Completed in 12 Weeks",
+      "summary": "A seamless home addition providing extra living space while perfectly matching the home's existing architectural style.",
+      "coverImage": "images/projects/5.webp"
+    },
+    {
+      "title": "Modern Exterior Makeover",
+      "location": "Portland, OR",
+      "duration": "Completed in 5 Weeks",
+      "summary": "A complete exterior renovation featuring new siding, energy-efficient windows, a modern entryway, and enhanced curb appeal.",
+      "coverImage": "images/projects/6.webp"
+    }
+  ],
+  "projectDetail": {
+    "category": "Kitchen Remodeling",
+    "year": "2026",
+    "description": "This kitchen remodel transformed an outdated space into a bright, open, and functional heart of the home. Premium materials, custom cabinetry, and modern finishes created a stylish kitchen that enhances daily living and adds lasting value.",
+    "brief": "The homeowners wanted to replace their outdated kitchen with a modern space that offered improved functionality, additional storage, and a welcoming atmosphere for family gatherings. The existing layout limited movement and lacked natural lighting, making the kitchen feel cramped and inefficient. Our objective was to create an open-concept design featuring custom cabinetry, a spacious island, premium quartz countertops, energy-efficient appliances, and carefully planned lighting while maintaining a timeless aesthetic that complements the rest of the home.",
+    "solution": "We completely redesigned the kitchen by removing unnecessary partitions to improve flow and maximize natural light. Custom cabinets were installed to increase storage capacity, while premium quartz countertops and a large multifunctional island became the focal point of the room. Modern LED lighting, elegant backsplash tiles, and high-performance appliances completed the transformation, resulting in a sophisticated kitchen that blends beauty, practicality, and lasting durability for everyday family living.",
+    "heroImage": "images/misc/w1.webp",
+    "gallery": [
+      "images/misc/l2.webp",
+      "images/misc/l3.webp",
+      "images/misc/l4.webp"
+    ]
+  },
+  "about": {
+    "subtitle": "About TOP CAPITAL",
+    "heading": "Transforming Homes\nWith Expert Renovations",
+    "text": "We specialize in home renovation, remodeling, and interior improvements that combine style, functionality, and lasting quality. From kitchen and bathroom upgrades to complete home transformations, our experienced team delivers every project with exceptional craftsmanship and attention to detail.",
+    "image1": "images/misc/l1.webp",
+    "image2": "images/misc/s1.webp",
+    "highlights": [
+      "Experienced Professionals",
+      "Premium Quality Materials",
+      "On-Time Project Delivery",
+      "Customer Satisfaction"
+    ]
+  },
+  "testimonials": [
+    {
+      "title": "A Stunning Home Transformation",
+      "text": "From the initial design to the final finishing touches, the entire renovation was handled beautifully. Our home feels completely refreshed and modern.",
+      "photo": "images/testimonial/1.webp",
+      "name": "Emily Richardson",
+      "role": "Whole Home Renovation, Austin, TX",
+      "rating": 5
+    },
+    {
+      "title": "Exceptional Bathroom Renovation",
+      "text": "They transformed our outdated bathroom into a beautiful, relaxing space. Every detail was carefully considered, and the quality of the work was outstanding.",
+      "photo": "images/testimonial/2.webp",
+      "name": "James Anderson",
+      "role": "Bathroom Renovation, Denver, CO",
+      "rating": 5
+    },
+    {
+      "title": "Our Dream Kitchen Came True",
+      "text": "The team understood exactly what we wanted and brought our vision to life. The new kitchen is functional, elegant, and easily our favorite room in the house.",
+      "photo": "images/testimonial/3.webp",
+      "name": "Sophia Bennett",
+      "role": "Kitchen Remodel, Portland, OR",
+      "rating": 5
+    },
+    {
+      "title": "Professional From Start to Finish",
+      "text": "Everything was organized and professionally managed from start to finish. The crew was respectful, reliable, and delivered exceptional results on schedule.",
+      "photo": "images/testimonial/4.webp",
+      "name": "Daniel Morgan",
+      "role": "Home Renovation, San Diego, CA",
+      "rating": 5
+    },
+    {
+      "title": "Beautifully Designed Living Space",
+      "text": "Our living room now feels spacious, warm, and sophisticated. The design choices and craftsmanship were excellent, and the finished space exceeded our expectations.",
+      "photo": "images/testimonial/5.webp",
+      "name": "Grace Mitchell",
+      "role": "Living Room Remodel, Chicago, IL",
+      "rating": 5
+    },
+    {
+      "title": "Exceeded Every Expectation",
+      "text": "We couldn't be happier with the result. The team paid attention to every small detail and made the entire renovation process smooth and stress-free.",
+      "photo": "images/testimonial/6.webp",
+      "name": "Michael Foster",
+      "role": "Home Extension, Nashville, TN",
+      "rating": 5
+    },
+    {
+      "title": "Quality Workmanship and Service",
+      "text": "From the first consultation to the final walkthrough, the team was attentive and professional. The workmanship is excellent, and we would happily recommend them.",
+      "photo": "images/testimonial/7.webp",
+      "name": "Charlotte Wilson",
+      "role": "Interior Renovation, Miami, FL",
+      "rating": 5
+    },
+    {
+      "title": "A Renovation Worth Every Penny",
+      "text": "The finished result is even better than we imagined. They combined great design with practical solutions and delivered a home we are genuinely proud of.",
+      "photo": "images/testimonial/8.webp",
+      "name": "Ryan Thompson",
+      "role": "Full Home Remodel, Boston, MA",
+      "rating": 5
+    }
+  ],
+  "faq": [
+    {
+      "category": "Planning & Design",
+      "question": "What renovation services do you offer?",
+      "answer": "We specialize in kitchen remodeling, bathroom renovations, home additions, basement finishing, flooring, and complete home renovations."
+    },
+    {
+      "category": "Planning & Design",
+      "question": "How do I start my renovation project?",
+      "answer": "Simply contact our team to schedule a consultation. We'll discuss your ideas, inspect the property, and prepare a personalized renovation plan."
+    },
+    {
+      "category": "Planning & Design",
+      "question": "Can you help with design and material selection?",
+      "answer": "Yes. Our design specialists help you choose layouts, finishes, colors, fixtures, and materials that match your style and budget."
+    },
+    {
+      "category": "Planning & Design",
+      "question": "Do I need permits before renovation?",
+      "answer": "Some projects require permits depending on local regulations. We can guide you through the approval process when necessary."
+    },
+    {
+      "category": "Planning & Design",
+      "question": "Can I renovate only one room?",
+      "answer": "Absolutely. Whether it's a single room or an entire house, we customize every project to meet your specific needs."
+    },
+    {
+      "category": "Construction Process",
+      "question": "How long does a renovation usually take?",
+      "answer": "Project duration depends on the size and complexity. Small renovations may take a few weeks, while larger remodels require several months."
+    },
+    {
+      "category": "Construction Process",
+      "question": "Can I stay in my home during renovation?",
+      "answer": "In many cases, yes. For larger renovations affecting multiple rooms, temporary relocation may be recommended for comfort and safety."
+    },
+    {
+      "category": "Construction Process",
+      "question": "How do you keep the work area clean?",
+      "answer": "We use protective coverings, dust barriers, and daily site cleanup to minimize disruption throughout the renovation process."
+    },
+    {
+      "category": "Construction Process",
+      "question": "Will I receive project progress updates?",
+      "answer": "Yes. We provide regular updates so you always know the current progress, upcoming milestones, and project schedule."
+    },
+    {
+      "category": "Construction Process",
+      "question": "What materials do you use?",
+      "answer": "We work with trusted suppliers and premium-quality materials to ensure lasting durability, performance, and beautiful finishes."
+    },
+    {
+      "category": "Pricing & Warranty",
+      "question": "How much does a renovation cost?",
+      "answer": "Costs vary depending on the project scope, materials, and design requirements. We provide detailed, transparent estimates before work begins."
+    },
+    {
+      "category": "Pricing & Warranty",
+      "question": "Do you provide free estimates?",
+      "answer": "Yes. We offer free consultations and project estimates to help you plan your renovation with confidence."
+    },
+    {
+      "category": "Pricing & Warranty",
+      "question": "Are there any hidden charges?",
+      "answer": "No. We believe in transparent pricing, with every cost clearly explained before construction begins."
+    },
+    {
+      "category": "Pricing & Warranty",
+      "question": "Do you offer warranties on your work?",
+      "answer": "Yes. Our workmanship is backed by a comprehensive warranty, giving you confidence in the quality of every renovation."
+    },
+    {
+      "category": "Pricing & Warranty",
+      "question": "What payment options are available?",
+      "answer": "We accept multiple payment methods and flexible payment schedules based on project milestones and contract terms."
+    }
+  ]
+}

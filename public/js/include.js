@@ -1,9 +1,10 @@
 /**
- * Shared layout loader.
+ * Shared layout loader + CMS content.
  *
  * Every page contains placeholders such as <div data-include="header"></div>.
  * This script replaces them with the matching file from /partials, marks the
- * current menu item as active, and then loads the page scripts in order
+ * current menu item as active, renders admin-managed content (js/cms.js) and
+ * then loads the page scripts in order
  * (they must run AFTER the header exists, otherwise the menu is not initialised).
  *
  * Usage (at the end of <body>):
@@ -12,7 +13,7 @@
  * data-scripts: optional, space-separated list of page-specific scripts.
  *
  * Note: fetch() does not work over file:// — open the site through a web server
- * (e.g. `python3 -m http.server`) when testing locally.
+ * (`npm start`) — the content API lives there too.
  */
 (function () {
     'use strict';
@@ -60,8 +61,16 @@
 
     var slots = Array.prototype.slice.call(document.querySelectorAll('[data-include]'));
 
+    // Content managed in the admin panel. A failure here must not break the page.
+    function renderCms() {
+        return loadScript('js/cms.js')
+            .then(function () { return window.CMS.render(); })
+            .catch(function (err) { console.error('[cms]', err); });
+    }
+
     Promise.all(slots.map(includePartial))
         .then(markActiveMenu)
+        .then(renderCms)
         .then(function () { return loadScriptsInOrder(CORE_SCRIPTS.concat(pageScripts)); })
         .then(function () {
             // Theme scripts hide the preloader and lay out galleries on window "load".

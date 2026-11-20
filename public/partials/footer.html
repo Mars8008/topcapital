@@ -17,10 +17,7 @@
                     property transformations, we bring your vision to life with precision and care.
                 </p>
 
-                <div class="social-icons mb-sm-30">
-                    <a href="https://www.facebook.com/people/Top-Capital-LLC/100092351732962/"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-                </div>
+                <div class="social-icons mb-sm-30" data-cms="social-links"></div>
             </div>
 
             <div class="col-lg-4 col-sm-12 order-lg-1 order-sm-2">
@@ -41,14 +38,7 @@
                     <div class="col-lg-6 col-sm-6">
                         <div class="widget">
                             <h2 class="hs-5">Our Services</h2>
-                            <ul>
-                                <li><a href="service-single.html">Home Renovation</a></li>
-                                <li><a href="service-single.html">Kitchen Remodeling</a></li>
-                                <li><a href="service-single.html">Bathroom Renovation</a></li>
-                                <li><a href="service-single.html">Interior Remodeling</a></li>
-                                <li><a href="service-single.html">Exterior Renovation</a></li>
-                                <li><a href="service-single.html">Commercial Renovation</a></li>
-                            </ul>
+                            <ul data-cms="footer-services" data-limit="6"></ul>
                         </div>
                     </div>
                 </div>
@@ -60,7 +50,7 @@
                         <i class="icofont-clock-time me-2 id-color-2"></i>
                         Working Hours
                     </div>
-                    Monday - Sat: 8:30 AM - 4:00 PM<br>
+                    <div data-bind="contact.hours">Monday - Sat: 8:30 AM - 4:00 PM</div>
 
                     <div class="spacer-20"></div>
 
@@ -68,7 +58,7 @@
                         <i class="icofont-location-pin me-2 id-color-2"></i>
                         Office Location
                     </div>
-                    41751 Cynthia ter, Aldie Virginia, United States
+                    <div data-bind="contact.address">41751 Cynthia ter, Aldie Virginia, United States</div>
 
                     <div class="spacer-20"></div>
 
@@ -76,7 +66,7 @@
                         <i class="icofont-envelope me-2 id-color-2"></i>
                         Email Us
                     </div>
-                    topcapitalllc74@gmail.com
+                    <div data-bind="contact.email">topcapitalllc74@gmail.com</div>
 
                     <div class="spacer-10"></div>
 
@@ -84,7 +74,7 @@
                         <i class="icofont-phone me-2 id-color-2"></i>
                         Call Us
                     </div>
-                    +1 (510) 590-0089
+                    <div data-bind="contact.phone">+1 (510) 590-0089</div>
                 </div>
             </div>
 

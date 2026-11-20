@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Админ | TOP CAPITAL</title>
+    <link rel="icon" href="/images/handyman_logo.svg" type="image/svg+xml">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="admin.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ===== Login ===== -->
+    <div id="login-view" class="login-wrap" hidden>
+        <form id="login-form" class="login-card" autocomplete="on">
+            <div class="text-center mb-4">
+                <img src="/images/handyman_logo.svg" alt="" width="72" height="72">
+                <h1 class="h4 mt-3 mb-1">TOP CAPITAL</h1>
+                <p class="text-muted mb-0">Админ хэсэгт нэвтрэх</p>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="login-username">Нэвтрэх нэр</label>
+                <input id="login-username" name="username" class="form-control" autocomplete="username" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="login-password">Нууц үг</label>
+                <input id="login-password" name="password" type="password" class="form-control" autocomplete="current-password" required>
+            </div>
+            <div id="login-error" class="alert alert-danger py-2" hidden></div>
+            <button class="btn btn-brand w-100" type="submit">Нэвтрэх</button>
+            <a href="/" class="d-block text-center mt-3 small">← Сайт руу буцах</a>
+        </form>
+    </div>
+
+    <!-- ===== App ===== -->
+    <div id="app-view" class="app" hidden>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <img src="/images/handyman_logo.svg" alt="" width="36" height="36">
+                <span>TOP CAPITAL</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#/dashboard" data-route="dashboard">Хянах самбар</a>
+                <div class="nav-group">Агуулга</div>
+                <a href="#/services" data-route="services">Үйлчилгээ</a>
+                <a href="#/projects" data-route="projects">Төслүүд</a>
+                <a href="#/about" data-route="about">Бидний тухай</a>
+                <a href="#/testimonials" data-route="testimonials">Сэтгэгдэл</a>
+                <a href="#/team" data-route="team">Баг хамт олон</a>
+                <a href="#/faq" data-route="faq">Түгээмэл асуулт (FAQ)</a>
+                <a href="#/contact" data-route="contact">Холбоо барих</a>
+                <div class="nav-group">Харилцагч</div>
+                <a href="#/messages" data-route="messages">Ирсэн мессеж <span class="badge-unread" id="unread-badge" hidden></span></a>
+                <div class="nav-group">Систем</div>
+                <a href="#/account" data-route="account">Нууц үг солих</a>
+                <a href="/" target="_blank" rel="noopener">Сайтыг харах ↗</a>
+                <button type="button" class="logout" id="logout-btn">Гарах</button>
+            </nav>
+        </aside>
+
+        <div class="main">
+            <header class="topbar">
+                <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Цэс">☰</button>
+                <h1 id="page-title" class="h5 mb-0">Хянах самбар</h1>
+                <span class="ms-auto text-muted small" id="current-user"></span>
+            </header>
+            <main id="page" class="page"></main>
+        </div>
+    </div>
+
+    <div id="toasts" class="toasts" aria-live="polite"></div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>

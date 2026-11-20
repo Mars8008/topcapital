@@ -1,36 +1,66 @@
-# topcapital
+# TOP CAPITAL LLC — website + admin panel
 
-TOP CAPITAL LLC website (static HTML).
+Node.js (Express) + MongoDB. The public website is static HTML whose content
+(services, projects, about, testimonials, team, FAQ, contact info) is managed
+from the admin panel at **`/admin`**.
 
 ## Structure
 
 ```
-*.html            pages — each contains only its own <main> content
-partials/         shared layout, edited in ONE place
-  header.html     logo + main menu
-  footer.html     contact info, links, copyright
-js/include.js     inserts the partials, marks the active menu item,
-                  then loads vendors.js + designesia.js (+ page scripts)
-css/, js/, images/, fonts/   theme assets
-contact.php, get-a-quote.php form handlers (need a PHP server)
+public/                 website (served as-is)
+  *.html                pages — each contains only its own <main> content
+  partials/             shared header.html / footer.html
+  js/include.js         inserts partials → renders CMS content → loads theme scripts
+  js/cms.js             fills [data-cms] / [data-bind] elements from /api/site
+  admin/                admin panel (index.html, admin.js, admin.css)
+server/
+  index.js              Express app (API + static files + /media images)
+  models/               Service, Project, Settings, Message, Media, User
+  routes/public.js      GET /api/site, /api/services/:slug, /api/projects/:slug, POST /api/messages
+  routes/admin.js       authenticated CRUD for the admin panel
+  routes/auth.js        login / logout / change password
+  seed.js               fills an empty database with the original site content
 ```
 
-## Adding a new page
+## Setup
 
-Copy any page (e.g. `services.html`), change the `<title>` and the `<main>` content.
-Page-specific scripts go in `data-scripts`:
+1. Install Node.js 20.12+ and create a MongoDB database
+   (free [MongoDB Atlas](https://www.mongodb.com/atlas) cluster works).
+2. Configure:
+   ```bash
+   cp .env.example .env      # then fill in MONGODB_URI, JWT_SECRET, ADMIN_PASSWORD
+   npm install
+   npm run seed              # one time: loads current services/projects/FAQ/etc.
+   npm start                 # http://localhost:3000  — admin at /admin
+   ```
+3. Log in with `ADMIN_USERNAME` / `ADMIN_PASSWORD`, then change the password
+   from **Нууц үг солих**.
+
+## Admin panel
+
+| Section | What it manages |
+|---|---|
+| Үйлчилгээ | add / edit / hide / delete / reorder services and their detail pages |
+| Төслүүд | add / edit / hide / delete / reorder projects, image gallery |
+| Бидний тухай | intro text & images (home + about), highlights |
+| Сэтгэгдэл / Баг / FAQ | testimonials, team members, FAQ (grouped into tabs by category) |
+| Холбоо барих | phone, email, address, hours, social links, Google Maps embed |
+| Ирсэн мессеж | contact & quote-form submissions |
+
+Uploaded images are stored in MongoDB and served from `/media/<id>`.
+
+## Adding content hooks to a page
 
 ```html
-<script src="js/include.js" data-scripts="js/validation-contact.js"></script>
+<div class="row g-4" data-cms="services-grid" data-limit="3"></div>
+<span data-bind="contact.phone"></span>
+<img data-bind-src="about.image1">
 ```
 
-## Running locally
+Renderers are listed in `public/js/cms.js` (`RENDERERS`).
 
-The partials are loaded with `fetch()`, which does not work when opening the
-file directly (`file://`). Start a local server instead:
+## Deployment
 
-```
-python3 -m http.server 8000
-```
-
-then open http://localhost:8000
+GitHub Pages cannot run Node.js. Deploy to any Node host (Render, Railway,
+Fly.io, a VPS, …) with the environment variables from `.env.example`, start
+command `npm start`, and run `npm run seed` once.

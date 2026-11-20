@@ -42,8 +42,16 @@ $(document).ready(function() {
                 'value': 'Sending...'
             });
 
-            $.post("contact.php", $("#contact_form").serialize(), function(result) {
-                if (result.trim() === 'sent') {
+            var payload = { type: 'contact', name: name, email: email, phone: phone, message: message,
+                            website: $('#contact_form input[name="website"]').val() };
+
+            $.ajax({
+                url: '/api/messages',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(payload)
+            }).always(function(result, status) {
+                if (status === 'success') {
                     // Success message
                     $('#contact_form').fadeOut(400, function() {
                         $('<div id="success_message" class="alert alert-success mt-3">Your message has been sent successfully!</div>')
