@@ -30,7 +30,7 @@ server/
    ```bash
    cp .env.example .env      # then fill in MONGODB_URI, JWT_SECRET, ADMIN_PASSWORD
    npm install
-   npm run seed              # one time: loads current services/projects/FAQ/etc.
+   # (first start on an empty database loads the original services/projects/FAQ automatically)
    npm start                 # http://localhost:3000  — admin at /admin
    ```
 3. Log in with `ADMIN_USERNAME` / `ADMIN_PASSWORD`, then change the password
@@ -63,4 +63,4 @@ Renderers are listed in `public/js/cms.js` (`RENDERERS`).
 
 GitHub Pages cannot run Node.js. Deploy to any Node host (Render, Railway,
 Fly.io, a VPS, …) with the environment variables from `.env.example`, start
-command `npm start`, and run `npm run seed` once.
+command `npm start`. The empty database is filled with the original content on first start.

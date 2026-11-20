@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const config = require('./config');
 const Media = require('./models/Media');
+const Settings = require('./models/Settings');
 const { ensureAdmin } = require('./bootstrap');
 
 const app = express();
@@ -71,6 +72,11 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 async function start() {
     await mongoose.connect(config.mongoUri);
     console.log('MongoDB connected');
+    // First run on an empty database: load the original site content.
+    // (Only when no settings document exists, so content deleted later is never re-added.)
+    if (!(await Settings.exists({}))) {
+        await require('./seed').seed();
+    }
     await ensureAdmin();
     app.listen(config.port, () => console.log(`TOP CAPITAL running at http://localhost:${config.port}  (admin: /admin)`));
 }
