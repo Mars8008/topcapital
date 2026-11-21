@@ -32,7 +32,18 @@ a { color: var(--brand-dark); }
 .sidebar-nav a, .sidebar-nav .logout { color: var(--sidebar-text); text-decoration: none; padding: 9px 12px; border-radius: 8px; display: flex; align-items: center; gap: 8px; background: none; border: 0; text-align: left; font: inherit; }
 .sidebar-nav a:hover, .sidebar-nav .logout:hover { background: rgba(255, 255, 255, .06); color: #fff; }
 .sidebar-nav a.active { background: var(--brand); color: #fff; }
-.nav-group { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; opacity: .5; padding: 16px 12px 6px; }
+/* Group headings (Агуулга / Харилцагч / Систем): clearly different from the links below them */
+.nav-group {
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: #c3cb9c;
+    margin-top: 14px;
+    padding: 16px 12px 8px;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+}
+.nav-group ~ a, .nav-group ~ .logout { padding-left: 20px; }
 .badge-unread { background: #d9534f; color: #fff; border-radius: 10px; font-size: 11px; padding: 1px 7px; margin-left: auto; }
 
 .main { flex: 1; min-width: 0; }
