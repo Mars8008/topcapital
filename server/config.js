@@ -19,6 +19,10 @@ const config = {
     publicDir: path.join(__dirname, '..', 'public'),
 };
 
+if (!/^mongodb(\+srv)?:\/\//.test(config.mongoUri)) {
+    throw new Error('MONGODB_URI буруу байна. .env файлд MongoDB Atlas-ын "mongodb+srv://..." хаягаа оруулна уу.');
+}
+
 if (isProduction && config.jwtSecret === 'dev-only-secret-change-me') {
     throw new Error('JWT_SECRET must be set in production.');
 }

@@ -59,8 +59,21 @@ Uploaded images are stored in MongoDB and served from `/media/<id>`.
 
 Renderers are listed in `public/js/cms.js` (`RENDERERS`).
 
-## Deployment
+## Deployment (Vercel)
 
-GitHub Pages cannot run Node.js. Deploy to any Node host (Render, Railway,
-Fly.io, a VPS, …) with the environment variables from `.env.example`, start
-command `npm start`. The empty database is filled with the original content on first start.
+`vercel.json` serves `public/` as static files and routes `/api/*` and `/media/*`
+to the serverless function in `api/index.js` (the same Express app).
+
+1. In MongoDB Atlas → Network Access, allow `0.0.0.0/0` (Vercel has no fixed IPs).
+2. In Vercel → Project → Settings → Environment Variables add, for Production and Preview:
+   `MONGODB_URI`, `JWT_SECRET`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `NODE_ENV=production`.
+3. Push. Each branch gets a preview URL; merging into `main` updates the live site.
+
+Image uploads are limited to 4MB (Vercel request body limit is 4.5MB).
+
+## Local development
+
+```bash
+npm run dev    # uses .env (MongoDB Atlas), restarts on code changes
+npm run demo   # no database needed: temporary in-memory MongoDB, data lost on stop
+```

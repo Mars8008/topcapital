@@ -60,7 +60,7 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
         return res.status(409).json({ error: 'Ийм нэртэй зүйл аль хэдийн байна.' });
     }
     if (err.code === 'LIMIT_FILE_SIZE') {
-        return res.status(413).json({ error: 'Зураг 8MB-аас хэтэрсэн байна.' });
+        return res.status(413).json({ error: 'Зураг 4MB-аас хэтэрсэн байна. Зургаа жижигрүүлээд дахин оролдоно уу.' });
     }
     if (err.status && err.status < 500) {   // e.g. malformed JSON body
         return res.status(err.status).json({ error: 'Буруу хүсэлт.' });
@@ -69,15 +69,30 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     res.status(500).json({ error: 'Серверийн алдаа гарлаа.' });
 });
 
-async function start() {
-    await mongoose.connect(config.mongoUri);
-    console.log('MongoDB connected');
-    // First run on an empty database: load the original site content.
-    // (Only when no settings document exists, so content deleted later is never re-added.)
-    if (!(await Settings.exists({}))) {
-        await require('./seed').seed();
+// Connects to MongoDB once per process and prepares the database.
+// Serverless platforms (Vercel) reuse warm instances, so the promise is cached.
+let readyPromise = null;
+function ready() {
+    if (!readyPromise) {
+        readyPromise = (async () => {
+            await mongoose.connect(config.mongoUri, { serverSelectionTimeoutMS: 10000 });
+            console.log('MongoDB connected');
+            // First run on an empty database: load the original site content.
+            // (Only when no settings document exists, so content deleted later is never re-added.)
+            if (!(await Settings.exists({}))) {
+                await require('./seed').seed();
+            }
+            await ensureAdmin();
+        })().catch((err) => {
+            readyPromise = null;   // allow a retry on the next request
+            throw err;
+        });
     }
-    await ensureAdmin();
+    return readyPromise;
+}
+
+async function start() {
+    await ready();
     app.listen(config.port, () => console.log(`TOP CAPITAL running at http://localhost:${config.port}  (admin: /admin)`));
 }
 
@@ -88,4 +103,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { app, start };
+module.exports = { app, start, ready };

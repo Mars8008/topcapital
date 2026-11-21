@@ -5,8 +5,8 @@ const config = require('./config');
 // when the database has no users yet.
 async function ensureAdmin() {
     if (await User.exists({})) return;
-    if (!config.adminPassword || config.adminPassword.length < 8) {
-        console.warn('⚠  No admin user exists. Set ADMIN_PASSWORD (8+ chars) in .env and restart to create one.');
+    if (!config.adminPassword || config.adminPassword.length < 8 || config.adminPassword.startsWith('CHANGE_ME')) {
+        console.warn('⚠  Админ хэрэглэгч алга. .env файлд ADMIN_PASSWORD-д 8+ тэмдэгттэй нууц үг бичээд серверээ дахин асаана уу.');
         return;
     }
     const user = new User({ username: config.adminUsername });

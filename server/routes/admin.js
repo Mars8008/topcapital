@@ -108,12 +108,12 @@ router.delete('/messages/:id', asyncHandler(async (req, res) => {
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
 const upload = multer({
     storage: multer.memoryStorage(),
-    limits: { fileSize: 8 * 1024 * 1024 },
+    limits: { fileSize: 4 * 1024 * 1024 },   // Vercel rejects request bodies over 4.5MB
     fileFilter: (req, file, cb) => cb(null, ALLOWED_TYPES.includes(file.mimetype)),
 });
 
 router.post('/media', upload.single('file'), asyncHandler(async (req, res) => {
-    if (!req.file) return res.status(400).json({ error: 'Зөвхөн JPG, PNG, WEBP, GIF, SVG зураг (8MB хүртэл).' });
+    if (!req.file) return res.status(400).json({ error: 'Зөвхөн JPG, PNG, WEBP, GIF, SVG зураг (4MB хүртэл).' });
     const media = await Media.create({
         filename: req.file.originalname,
         contentType: req.file.mimetype,
