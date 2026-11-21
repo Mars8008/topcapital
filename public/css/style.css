@@ -10655,6 +10655,12 @@ width: auto;
     letter-spacing: -1px;
 }
 
+/* Square logo inside the 100x60 header / 100x100 footer boxes: keep its proportions. */
+#logo img,
+footer .logo-footer {
+    object-fit: contain;
+}
+
 @media (max-width: 767px) {
     .top-capital-name {
        

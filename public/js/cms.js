@@ -368,7 +368,8 @@
 
     window.CMS = {
         render: function () {
-            return api('site').then(function (site) {
+            // include.js starts this request early so it runs in parallel with the partials.
+            return (window.CMS_SITE || api('site')).then(function (site) {
                 window.CMS.site = site;
                 applyBindings(site);
                 var els = Array.prototype.slice.call(document.querySelectorAll('[data-cms]'));

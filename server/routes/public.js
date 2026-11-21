@@ -6,6 +6,11 @@ const Settings = require('../models/Settings');
 const Message = require('../models/Message');
 const { asyncHandler, rateLimit } = require('../util');
 
+// Public content may be cached by the CDN (Vercel edge) for 30s and then served
+// stale while it refreshes in the background, so most visitors never wait for the
+// serverless function or the database. Admin edits appear within ~30 seconds.
+const EDGE_CACHE = 'public, max-age=0, s-maxage=30, stale-while-revalidate=86400';
+
 const CARD_FIELDS = 'title slug summary image icon';
 const PROJECT_CARD_FIELDS = 'title slug category location duration summary coverImage';
 
@@ -16,19 +21,21 @@ router.get('/site', asyncHandler(async (req, res) => {
         Project.find({ published: true }).sort({ order: 1, createdAt: -1 }).select(PROJECT_CARD_FIELDS).lean(),
     ]);
     const { contact, about, testimonials, team, faq } = settings.toObject();
-    res.set('Cache-Control', 'no-cache');
+    res.set('Cache-Control', EDGE_CACHE);
     res.json({ contact, about, testimonials, team, faq, services, projects });
 }));
 
 router.get('/services/:slug', asyncHandler(async (req, res) => {
     const service = await Service.findOne({ slug: req.params.slug, published: true }).lean();
     if (!service) return res.status(404).json({ error: 'Service not found' });
+    res.set('Cache-Control', EDGE_CACHE);
     res.json(service);
 }));
 
 router.get('/projects/:slug', asyncHandler(async (req, res) => {
     const project = await Project.findOne({ slug: req.params.slug, published: true }).lean();
     if (!project) return res.status(404).json({ error: 'Project not found' });
+    res.set('Cache-Control', EDGE_CACHE);
     res.json(project);
 }));
 

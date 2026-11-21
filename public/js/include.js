@@ -23,6 +23,22 @@
     var self = document.currentScript;
     var pageScripts = (self.getAttribute('data-scripts') || '').split(/\s+/).filter(Boolean);
 
+    // Start every download right away (in parallel); execution order is still
+    // controlled below. Scripts are preloaded, and the site content request is
+    // shared with cms.js through window.CMS_SITE.
+    ['js/cms.js'].concat(CORE_SCRIPTS, pageScripts).forEach(function (src) {
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'script';
+        link.href = src;
+        document.head.appendChild(link);
+    });
+    window.CMS_SITE = fetch('/api/site', { headers: { Accept: 'application/json' } }).then(function (res) {
+        if (!res.ok) throw new Error('/api/site → ' + res.status);
+        return res.json();
+    });
+    window.CMS_SITE.catch(function () {});   // handled in cms.js; avoid an unhandled-rejection warning
+
     function includePartial(el) {
         var url = 'partials/' + el.getAttribute('data-include') + '.html';
         return fetch(url)
@@ -62,8 +78,9 @@
     var slots = Array.prototype.slice.call(document.querySelectorAll('[data-include]'));
 
     // Content managed in the admin panel. A failure here must not break the page.
+    var cmsLoaded = loadScript('js/cms.js');
     function renderCms() {
-        return loadScript('js/cms.js')
+        return cmsLoaded
             .then(function () { return window.CMS.render(); })
             .catch(function (err) { console.error('[cms]', err); });
     }
