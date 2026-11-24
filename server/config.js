@@ -17,6 +17,13 @@ const config = {
     adminUsername: process.env.ADMIN_USERNAME || 'admin',
     adminPassword: process.env.ADMIN_PASSWORD || '',
     publicDir: path.join(__dirname, '..', 'public'),
+    smtp: {
+        host: process.env.SMTP_HOST || 'smtp.gmail.com',
+        port: Number(process.env.SMTP_PORT) || 465,
+        user: (process.env.SMTP_USER || '').trim(),
+        pass: (process.env.SMTP_PASS || '').replace(/\s+/g, ''),   // Gmail shows app passwords with spaces
+        notifyTo: (process.env.NOTIFY_EMAIL || '').trim(),
+    },
 };
 
 if (!/^mongodb(\+srv)?:\/\//.test(config.mongoUri)) {

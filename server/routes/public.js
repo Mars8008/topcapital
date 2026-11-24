@@ -5,6 +5,7 @@ const Project = require('../models/Project');
 const Settings = require('../models/Settings');
 const Message = require('../models/Message');
 const { asyncHandler, rateLimit } = require('../util');
+const { notifyNewMessage } = require('../mailer');
 
 // Public content may be cached by the CDN (Vercel edge) for 30s and then served
 // stale while it refreshes in the background, so most visitors never wait for the
@@ -20,9 +21,9 @@ router.get('/site', asyncHandler(async (req, res) => {
         Service.find({ published: true }).sort({ order: 1, createdAt: 1 }).select(CARD_FIELDS).lean(),
         Project.find({ published: true }).sort({ order: 1, createdAt: -1 }).select(PROJECT_CARD_FIELDS).lean(),
     ]);
-    const { contact, about, testimonials, team, faq } = settings.toObject();
+    const { home, contact, about, testimonials, team, faq } = settings.toObject();
     res.set('Cache-Control', EDGE_CACHE);
-    res.json({ contact, about, testimonials, team, faq, services, projects });
+    res.json({ home, contact, about, testimonials, team, faq, services, projects });
 }));
 
 router.get('/services/:slug', asyncHandler(async (req, res) => {
@@ -63,7 +64,7 @@ router.post('/messages', formLimiter, asyncHandler(async (req, res) => {
         }
     }
 
-    await Message.create({
+    const saved = await Message.create({
         type,
         name,
         email,
@@ -71,6 +72,14 @@ router.post('/messages', formLimiter, asyncHandler(async (req, res) => {
         message: String(body.message || body.project_description || '').trim(),
         details,
     });
+
+    // Awaited (not fire-and-forget) because Vercel freezes the function once the
+    // response is sent. A mail failure never loses the message — it is already saved.
+    try {
+        await notifyNewMessage(saved.toObject({ flattenMaps: true }), `${req.protocol}://${req.get('host')}`);
+    } catch (err) {
+        console.error('Email notification failed:', err.message);
+    }
     res.json({ ok: true });
 }));
 

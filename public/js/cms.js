@@ -6,6 +6,7 @@
  *   data-limit="3"             optional max number of items for list renderers
  *   data-bind="contact.email"  sets text (newlines become <br>)
  *   data-bind-src="about.image1"
+ *   data-bind-href="home.heroButtonLink"
  *   data-hide-empty            on a section: removed when its renderer has no items
  *
  * include.js calls CMS.render() BEFORE loading the theme scripts, so carousels,
@@ -115,7 +116,35 @@
     }
 
     // ---------- renderers: (element, site) → html string | Promise<string> ----------
+    // Home renderers return null when the API has no `home` data, keeping the static HTML.
     var RENDERERS = {
+        'home-slides': function (el, site) {
+            var slides = site.home && (site.home.slides || []).map(safeUrl).filter(Boolean);
+            if (!slides || !slides.length) return null;
+            return slides.map(function (u) {
+                return '<div class="swiper-slide"><div class="swiper-inner" data-bgimage="url(' + u + ')">' +
+                    '<div class="sw-overlay op-3"></div><div class="gradient-edge-start w-50 op-7"></div></div></div>';
+            }).join('');
+        },
+
+        'home-stats': function (el, site) {
+            if (!site.home || !site.home.stats) return null;
+            return site.home.stats.map(function (s, i) {
+                return '<div class="col-md-3 col-sm-6"><div class="de_count wow fadeInUp" data-wow-delay="' + delay(i, 0.1) + '">' +
+                    '<div class="d-flex align-items-center justify-content-center">' +
+                    (s.icon ? '<i class="' + esc(s.icon) + ' fs-40 id-color me-3"></i>' : '') +
+                    '<div class="text-start"><h2 class="fs-32 mb-1 lh-1">' + esc(s.value) + '</h2><span>' + esc(s.label) + '</span></div>' +
+                    '</div></div></div>';
+            }).join('');
+        },
+
+        'home-before-after': function (el, site) {
+            var h = site.home;
+            if (!h || !h.beforeImage || !h.afterImage) return null;
+            return '<img src="' + safeUrl(h.beforeImage) + '" alt="Before" class="img-responsive">' +
+                '<img src="' + safeUrl(h.afterImage) + '" alt="After" class="img-responsive">';
+        },
+
         'services-grid': function (el, site) {
             return limit(el, site.services).map(serviceCard).join('');
         },
@@ -353,6 +382,20 @@
             var v = safeUrl(get(site, el.getAttribute('data-bind-src')));
             if (v) el.setAttribute('src', v.replace(/&amp;/g, '&'));
         });
+        document.querySelectorAll('[data-bind-href]').forEach(function (el) {
+            var v = safeUrl(get(site, el.getAttribute('data-bind-href')));
+            if (v) el.setAttribute('href', v.replace(/&amp;/g, '&'));
+        });
+    }
+
+    // The before/after slider measures its images once on start-up; re-measure
+    // when images inserted by the CMS finish loading.
+    function refreshSlidersOnImageLoad() {
+        document.querySelectorAll('.twentytwenty-container img').forEach(function (img) {
+            img.addEventListener('load', function () {
+                if (window.jQuery) window.jQuery(window).trigger('resize.twentytwenty');
+            });
+        });
     }
 
     function renderElement(el, site) {
@@ -360,6 +403,7 @@
         var fn = RENDERERS[name];
         if (!fn) return Promise.resolve(console.warn('[cms] unknown renderer', name));
         return Promise.resolve(fn(el, site)).then(function (html) {
+            if (html == null) return;   // renderer chose to keep the static fallback
             var section = el.closest('[data-hide-empty]');
             if (!html && section) section.remove();
             else el.innerHTML = html;
@@ -373,7 +417,8 @@
                 window.CMS.site = site;
                 applyBindings(site);
                 var els = Array.prototype.slice.call(document.querySelectorAll('[data-cms]'));
-                return Promise.all(els.map(function (el) { return renderElement(el, site); }));
+                return Promise.all(els.map(function (el) { return renderElement(el, site); }))
+                    .then(refreshSlidersOnImageLoad);
             });
         },
     };

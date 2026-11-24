@@ -73,7 +73,7 @@ crud('projects', Project, ['title', 'category', 'year', 'location', 'duration', 
     'heroImage', 'description', 'brief', 'solution', 'gallery', 'order', 'published'], { order: 1, createdAt: -1 });
 
 // ---------- site settings (about / contact / testimonials / team / faq) ----------
-const SECTIONS = ['contact', 'about', 'testimonials', 'team', 'faq'];
+const SECTIONS = ['home', 'contact', 'about', 'testimonials', 'team', 'faq'];
 
 router.get('/settings', asyncHandler(async (req, res) => {
     res.json(await Settings.get());

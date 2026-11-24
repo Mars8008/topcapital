@@ -306,6 +306,35 @@
         { name: 'solution', label: 'Бидний шийдэл (Our Solution)', type: 'textarea', rows: 5 },
     ];
 
+    var HOME_FIELDS = [
+        { section: 'Hero — нүүрний том хэсэг' },
+        { name: 'heroTitle1', label: 'Гарчиг (1-р мөр)', col: 'col-md-6' },
+        { name: 'heroTitle2', label: 'Гарчиг (2-р мөр, өнгөтэй)', col: 'col-md-6' },
+        { name: 'heroText', label: 'Тайлбар текст', type: 'textarea', rows: 3 },
+        { name: 'heroButtonText', label: 'Товчны текст', col: 'col-md-6' },
+        { name: 'heroButtonLink', label: 'Товч дарахад очих хуудас', col: 'col-md-6', placeholder: 'get-a-quote.html',
+          help: 'Жишээ: get-a-quote.html, contact.html, services.html' },
+        { name: 'slides', label: 'Арын зургууд (ээлжлэн солигдоно)', type: 'list', addLabel: 'Зураг нэмэх', itemLabel: 'Зураг',
+          help: 'Хэвтээ, том зураг (1920px орчим өргөнтэй) тохиромжтой. ↑↓ товчоор дарааллыг өөрчилнө.',
+          scalar: { type: 'image', label: 'Зураг' } },
+        { name: 'stats', label: 'Тоон үзүүлэлтүүд (hero доод хэсэг)', type: 'list', addLabel: 'Үзүүлэлт нэмэх', itemLabel: 'Үзүүлэлт',
+          fields: [
+              { name: 'value', label: 'Тоо', placeholder: '10+', col: 'col-md-3' },
+              { name: 'label', label: 'Тайлбар', placeholder: 'Years Experience', col: 'col-md-5' },
+              { name: 'icon', label: 'Икон', type: 'select', default: 'fa-solid fa-house', col: 'col-md-4',
+                options: ['fa-solid fa-house', 'fa-solid fa-hammer', 'fa-solid fa-face-smile', 'fa-solid fa-user-check',
+                    'fa-solid fa-star', 'fa-solid fa-award', 'fa-solid fa-trophy', 'fa-solid fa-users', 'fa-solid fa-building',
+                    'fa-solid fa-paint-roller', 'fa-solid fa-ruler-combined', 'fa-solid fa-clock', 'fa-solid fa-thumbs-up', 'fa-solid fa-check'] },
+          ] },
+
+        { section: 'Before & After — өмнө/дараа харьцуулалт' },
+        { name: 'beforeAfterSubtitle', label: 'Жижиг гарчиг', col: 'col-md-6' },
+        { name: 'beforeAfterTitle', label: 'Гарчиг', col: 'col-md-6' },
+        { name: 'beforeImage', label: 'ӨМНӨ (засварын өмнөх зураг)', type: 'image', col: 'col-md-6' },
+        { name: 'afterImage', label: 'ДАРАА (засварын дараах зураг)', type: 'image', col: 'col-md-6',
+          help: 'Хоёр зураг ижил хэмжээтэй, ижил өнцгөөс авсан байвал гулсуулах үед зөв харагдана.' },
+    ];
+
     var ABOUT_FIELDS = [
         { section: 'Танилцуулга (Нүүр хуудас болон Бидний тухай хуудсанд харагдана)' },
         { name: 'subtitle', label: 'Жижиг гарчиг', placeholder: 'About TOP CAPITAL' },
@@ -401,6 +430,7 @@
                 '<div class="card-box"><h2>Түргэн үйлдэл</h2><div class="d-flex flex-wrap gap-2">' +
                 '<a class="btn btn-brand" href="#/services/new">+ Шинэ үйлчилгээ</a>' +
                 '<a class="btn btn-brand" href="#/projects/new">+ Шинэ төсөл</a>' +
+                '<a class="btn btn-outline-secondary" href="#/home">Нүүр хуудас засах</a>' +
                 '<a class="btn btn-outline-secondary" href="#/about">Бидний тухай засах</a>' +
                 '<a class="btn btn-outline-secondary" href="#/contact">Холбоо барих засах</a>' +
                 '</div></div>' +
@@ -501,7 +531,7 @@
             page().innerHTML =
                 (intro ? '<p class="text-muted">' + intro + '</p>' : '') +
                 '<form class="card-box" id="settings-form" novalidate><div id="fields"></div>' +
-                saveBar('<a class="btn btn-outline-secondary" target="_blank" rel="noopener" href="/' + (section === 'contact' ? 'contact.html' : 'about.html') + '">Сайт дээр харах ↗</a>') +
+                saveBar('<a class="btn btn-outline-secondary" target="_blank" rel="noopener" href="/' + ({ contact: 'contact.html', home: '' }[section] ?? 'about.html') + '">Сайт дээр харах ↗</a>') +
                 '</form>';
             var form = buildForm($('#fields'), fields, wrap ? { items: value } : value);
             $('#settings-form').addEventListener('submit', function (e) {
@@ -593,6 +623,7 @@
         dashboard: dashboard,
         services: function (id) { return id ? collectionEdit(SERVICES, id) : collectionList(SERVICES); },
         projects: function (id) { return id ? collectionEdit(PROJECTS, id) : collectionList(PROJECTS); },
+        home: function () { settingsPage('home', 'Нүүр хуудас', HOME_FIELDS, 'Нүүр хуудасны hero хэсэг болон Before & After зургууд. Хадгалсны дараа сайт дээр 30 секундын дотор шинэчлэгдэнэ.'); },
         about: function () { settingsPage('about', 'Бидний тухай', ABOUT_FIELDS); },
         testimonials: function () { settingsPage('testimonials', 'Үйлчлүүлэгчдийн сэтгэгдэл', TESTIMONIAL_FIELDS, 'Нүүр хуудас болон "Бидний тухай" хуудсанд гүйдэг хэлбэрээр харагдана.', true); },
         team: function () { settingsPage('team', 'Баг хамт олон', TEAM_FIELDS, '"Бидний тухай" хуудасны "Meet the Experts" хэсэг.', true); },

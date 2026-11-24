@@ -15,6 +15,38 @@ const settingsSchema = new Schema({
         mapEmbedUrl: { type: String, trim: true, default: '' },
     },
 
+    // Home page hero + before/after. Defaults are the site's original content, so an
+    // existing database shows the same page until the admin edits it.
+    home: {
+        heroTitle1: { type: String, trim: true, default: 'Creating Modern Spaces' },
+        heroTitle2: { type: String, trim: true, default: 'For Better Living' },
+        heroText: {
+            type: String, trim: true,
+            default: 'Complete home renovations, custom remodeling, and premium craftsmanship—designed to create beautiful, functional spaces you\'ll enjoy for years to come.',
+        },
+        heroButtonText: { type: String, trim: true, default: 'Start Your Project' },
+        heroButtonLink: { type: String, trim: true, default: 'get-a-quote.html' },
+        slides: { type: [String], default: () => ['images/slider/1.webp', 'images/slider/2.webp'] },
+        stats: {
+            type: [{
+                _id: false,
+                icon: { type: String, trim: true, default: 'fa-solid fa-house' },
+                value: { type: String, trim: true, default: '' },
+                label: { type: String, trim: true, default: '' },
+            }],
+            default: () => [
+                { icon: 'fa-solid fa-house', value: '10+', label: 'Years Experience' },
+                { icon: 'fa-solid fa-hammer', value: '850+', label: 'Homes Renovated' },
+                { icon: 'fa-solid fa-face-smile', value: '98%', label: 'Customer Satisfaction' },
+                { icon: 'fa-solid fa-user-check', value: '24/7', label: 'Support & Consultation' },
+            ],
+        },
+        beforeAfterSubtitle: { type: String, trim: true, default: 'Before & After' },
+        beforeAfterTitle: { type: String, trim: true, default: 'From Outdated to Outstanding' },
+        beforeImage: { type: String, trim: true, default: 'images/before-after/1b.webp' },
+        afterImage: { type: String, trim: true, default: 'images/before-after/1a.webp' },
+    },
+
     about: {
         subtitle: { type: String, trim: true, default: '' },
         heading: { type: String, trim: true, default: '' },
